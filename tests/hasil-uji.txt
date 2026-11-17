@@ -1,0 +1,48 @@
+============================================================
+ PENGUJIAN LOGIKA SAKU MAHASISWA
+ Basis pengetahuan : 12 aturan
+ Metode            : forward chaining + resolusi prioritas
+============================================================
+
+A. VALIDASI BASIS PENGETAHUAN
+  ✔ LULUS  Jumlah aturan adalah 12  →  12
+  ✔ LULUS  ID aturan unik  →  12
+  ✔ LULUS  Semua aturan memiliki 5 kondisi  →  true
+  ✔ LULUS  Semua hasil berada pada P1–P4  →  ["P1","P2","P3","P4"]
+
+B. SATU KASUS UNTUK SETIAP ATURAN
+  ✔ LULUS  R01 → P1 (Kebutuhan akademik/pokok yang sangat mendesak, misalnya membayar SPP.)  →  {"status":"cocok","id":"R01","prioritas":"P1"}
+  ✔ LULUS  R02 → P1 (Kebutuhan hidup dasar yang mendesak, misalnya kos atau obat darurat.)  →  {"status":"cocok","id":"R02","prioritas":"P1"}
+  ✔ LULUS  R03 → P1 (Penunjang kuliah penting yang harus disiapkan sebelum tenggat.)  →  {"status":"cocok","id":"R03","prioritas":"P1"}
+  ✔ LULUS  R04 → P2 (Penunjang akademik penting dengan tenggat yang masih agak longgar.)  →  {"status":"cocok","id":"R04","prioritas":"P2"}
+  ✔ LULUS  R05 → P2 (Mendesak dan terkait kuliah, tetapi tingkat kepentingannya menengah.)  →  {"status":"cocok","id":"R05","prioritas":"P2"}
+  ✔ LULUS  R06 → P2 (Persiapan jangka panjang untuk kuliah yang tetap perlu dianggarkan.)  →  {"status":"cocok","id":"R06","prioritas":"P2"}
+  ✔ LULUS  R07 → P3 (Penunjang kuliah sekunder yang tidak terlalu mendesak.)  →  {"status":"cocok","id":"R07","prioritas":"P3"}
+  ✔ LULUS  R08 → P3 (Kebutuhan sehari-hari rutin yang waktunya masih bisa digeser.)  →  {"status":"cocok","id":"R08","prioritas":"P3"}
+  ✔ LULUS  R09 → P3 (Keinginan sesaat yang mendadak, tetapi minim dampak akademis.)  →  {"status":"cocok","id":"R09","prioritas":"P3"}
+  ✔ LULUS  R10 → P4 (Hiburan atau rekreasi yang sebaiknya menunggu dana sisa.)  →  {"status":"cocok","id":"R10","prioritas":"P4"}
+  ✔ LULUS  R11 → P4 (Keinginan konsumtif yang tidak berkaitan dengan kegiatan kuliah.)  →  {"status":"cocok","id":"R11","prioritas":"P4"}
+  ✔ LULUS  R12 → P4 (Tersier/hiburan tidak mendesak yang bisa dibatalkan jika anggaran menipis.)  →  {"status":"cocok","id":"R12","prioritas":"P4"}
+
+C. PENGUJIAN KONDISI NILAI ARRAY (R02)
+  ✔ LULUS  R02 menerima kaitan = Sedang  →  {"status":"cocok","id":"R02"}
+  ✔ LULUS  R02 menerima kaitan = Rendah  →  {"status":"cocok","id":"R02"}
+
+D. KASUS TIDAK ADA ATURAN COCOK
+  ✔ LULUS  Contoh demo: jaket edisi terbatas  →  {"status":"tidak_cocok","aturan":null}
+  ✔ LULUS  Kombinasi tidak terdefinisi #1  →  {"status":"tidak_cocok","aturan":null}
+  ✔ LULUS  Kombinasi tidak terdefinisi #2  →  {"status":"tidak_cocok","aturan":null}
+  ✔ LULUS  Fakta tidak lengkap  →  {"status":"tidak_cocok","aturan":null}
+
+E. FUNGSI cocokkanAturan()
+  ✔ LULUS  Fakta persis cocok dengan R01  →  true
+  ✔ LULUS  Satu kondisi berbeda membuat aturan tidak cocok  →  false
+  ✔ LULUS  Fakta kosong tidak cocok dengan aturan mana pun  →  false
+
+F. RESOLUSI KONFLIK ANTAR-ATURAN
+  ✔ LULUS  Tiga aturan cocok, P1 dipilih sebagai pemenang  →  {"status":"cocok","id":"X2","hasil":"P1"}
+  ✔ LULUS  Tanpa aturan P1, P2 mengalahkan P4  →  {"status":"cocok","id":"X3","hasil":"P2"}
+
+============================================================
+ HASIL AKHIR: 27/27 pengujian lulus, 0 gagal.
+============================================================

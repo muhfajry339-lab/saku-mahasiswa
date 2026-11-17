@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Ikon Saku Mahasiswa">
+  <defs>
+    <linearGradient id="fvBg" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F9D8A"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="fvCoin" x1="24" y1="22" x2="42" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE082"/>
+      <stop offset="1" stop-color="#F5B301"/>
+    </linearGradient>
+  </defs>
+  <rect x="3" y="3" width="58" height="58" rx="17" fill="url(#fvBg)"/>
+  <path d="M32 10 51 18 32 26 13 18Z" fill="#FFFFFF"/>
+  <path d="M24 23 32 26 40 23v7c-3 3-13 3-16 0Z" fill="#FFFFFF" opacity="0.55"/>
+  <path d="M49 19c3 3 4 6 3 10" fill="none" stroke="#F5B301" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="52.5" cy="31" r="2.4" fill="#F5B301"/>
+  <rect x="15" y="30" width="34" height="24" rx="8" fill="#FFFFFF"/>
+  <path d="M16 38h32" stroke="#0F9D8A" stroke-opacity="0.28" stroke-width="1.6"/>
+  <rect x="30" y="27" width="13" height="5" rx="2.5" fill="#0B4F47" opacity="0.55"/>
+  <rect x="40" y="41" width="8" height="5.5" rx="2.7" fill="url(#fvCoin)"/>
+  <circle cx="32" cy="30.5" r="8.5" fill="url(#fvCoin)" stroke="#B87900" stroke-width="1"/>
+  <circle cx="32" cy="30.5" r="5.8" fill="none" stroke="#B87900" stroke-opacity="0.5" stroke-width="0.9"/>
+</svg>

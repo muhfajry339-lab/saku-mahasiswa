@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Logo Saku Mahasiswa</title>
+  <desc id="logoDesc">Dompet dengan koin yang keluar dan topi toga, melambangkan pengelolaan keuangan mahasiswa.</desc>
+  <defs>
+    <linearGradient id="lmWallet" x1="32" y1="62" x2="132" y2="138" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F9D8A"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="lmCap" x1="26" y1="20" x2="138" y2="70" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F9D8A"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+    <linearGradient id="lmCoin" x1="63" y1="48" x2="99" y2="84" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFE082"/>
+      <stop offset="0.5" stop-color="#F5B301"/>
+      <stop offset="1" stop-color="#D49400"/>
+    </linearGradient>
+    <linearGradient id="lmText" x1="166" y1="55" x2="300" y2="96" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0F9D8A"/>
+      <stop offset="1" stop-color="#2563EB"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Topi toga -->
+  <path d="M82 18 138 43 82 68 26 43Z" fill="url(#lmCap)"/>
+  <path d="M56 54 82 65 108 54v17c-8 7-44 7-52 0Z" fill="#1E40AF" opacity="0.55"/>
+  <path d="M134 44c7 6 9 15 7 25" fill="none" stroke="#F5B301" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="141" cy="72" r="4.5" fill="#F5B301"/>
+
+  <!-- Dompet -->
+  <rect x="32" y="70" width="100" height="64" rx="17" fill="url(#lmWallet)"/>
+  <path d="M34 89h96" stroke="#FFFFFF" stroke-opacity="0.32" stroke-width="2"/>
+  <rect x="66" y="64" width="31" height="10" rx="5" fill="#083F3A" opacity="0.55"/>
+  <path d="M44 82c5-5 11-7 17-7" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <rect x="103" y="94" width="21" height="13" rx="6.5" fill="url(#lmCoin)"/>
+  <circle cx="113.5" cy="100.5" r="2" fill="#7A5200"/>
+
+  <!-- Koin keluar dari dompet -->
+  <circle cx="81" cy="65" r="19" fill="url(#lmCoin)"/>
+  <circle cx="81" cy="65" r="19" fill="none" stroke="#B87900" stroke-width="1.6"/>
+  <circle cx="81" cy="65" r="14" fill="none" stroke="#B87900" stroke-opacity="0.45" stroke-width="1.4"/>
+  <text x="81" y="70.5" text-anchor="middle" font-family="'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif" font-size="12" font-weight="800" fill="#6B4300">Rp</text>
+
+  <!-- Teks -->
+  <text x="166" y="92" font-family="'Plus Jakarta Sans','Segoe UI',system-ui,sans-serif" font-size="48" font-weight="800" letter-spacing="1" fill="url(#lmText)">SAKU</text>
+  <text x="168" y="120" font-family="'Inter','Segoe UI',system-ui,sans-serif" font-size="15" font-weight="600" letter-spacing="6" fill="#64748B">MAHASISWA</text>
+  <rect x="168" y="131" width="56" height="4" rx="2" fill="#F5B301"/>
+  <rect x="232" y="132" width="96" height="2" rx="1" fill="#CBD5E1"/>
+</svg>
