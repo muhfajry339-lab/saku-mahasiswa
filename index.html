@@ -225,8 +225,8 @@
           <div class="hero-copy">
             <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg> Sistem Pakar Berbasis Aturan</span>
             <h1 id="judul-beranda">SAKU <span class="text-gradient">MAHASISWA</span></h1>
-            <p class="hero-tagline">Tentukan prioritas pengeluaranmu dengan sistem pakar.</p>
-            <p class="hero-desc">Bingung uang saku habis sebelum akhir bulan? Nilai pengeluaranmu lewat 5 indikator, lalu biarkan mesin inferensi <em>forward chaining</em> menentukan mana yang harus dibayar lebih dulu.</p>
+            <p class="hero-tagline">Tentukan prioritas kebutuhanmu dengan sistem pakar.</p>
+            <p class="hero-desc">Bingung uang saku habis sebelum akhir bulan? Pilih kebutuhanmu, nilai lewat 5 indikator, lalu biarkan mesin inferensi <em>forward chaining</em> dan skor otomatis menentukan mana yang harus dipenuhi lebih dulu.</p>
             <div class="hero-actions">
               <a href="#analisis" class="btn btn-primary">Mulai Analisis <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
               <a href="#tentang" class="btn btn-ghost">Pelajari Metode</a>
@@ -274,8 +274,8 @@
             <article class="step-card">
               <span class="step-number">01</span>
               <span class="feature-icon"><svg class="icon" aria-hidden="true"><use href="#i-wallet"></use></svg></span>
-              <h3>Isi data pengeluaran</h3>
-              <p>Tulis nama pengeluaran, misalnya “Bayar SPP”, dan nominalnya jika sudah diketahui.</p>
+              <h3>Pilih kebutuhanmu</h3>
+              <p>Pilih kategori seperti UKT atau uang makan, atau ketik kebutuhan sendiri, lalu isi nominalnya.</p>
             </article>
             <article class="step-card">
               <span class="step-number">02</span>
@@ -372,7 +372,7 @@
         <section class="cta-band" aria-labelledby="judul-cta">
           <div>
             <span class="eyebrow light">Siap mencoba?</span>
-            <h2 id="judul-cta">Susun prioritas pengeluaranmu sekarang.</h2>
+            <h2 id="judul-cta">Susun prioritas kebutuhanmu sekarang.</h2>
             <p>Gratis, langsung di browser, dan tidak memerlukan akun.</p>
           </div>
           <a href="#analisis" class="btn btn-gold">Mulai Analisis <svg class="icon" aria-hidden="true"><use href="#i-arrow-right"></use></svg></a>
@@ -387,7 +387,7 @@
           <div>
             <span class="eyebrow">Formulir analisis</span>
             <h1 id="judul-analisis">Analisis Prioritas Pengeluaran</h1>
-            <p>Isi data pengeluaran dan pilih lima indikator. Tombol analisis aktif setelah semuanya lengkap.</p>
+            <p>Isi kebutuhan dan pilih lima indikator. Tombol analisis aktif setelah semuanya lengkap.</p>
           </div>
           <button class="btn btn-ghost" id="btn-contoh" type="button" aria-expanded="false" aria-controls="panel-contoh">
             <svg class="icon" aria-hidden="true"><use href="#i-sparkle"></use></svg>
@@ -410,21 +410,39 @@
               <div class="form-section-head">
                 <span class="section-number">1</span>
                 <div>
-                  <h2>Data Pengeluaran</h2>
-                  <p>Beri nama agar mudah dikenali saat disimpan ke riwayat.</p>
+                  <h2>Data Kebutuhan</h2>
+                  <p>Pilih kategori dari daftar atau ketik kebutuhanmu sendiri agar mudah dikenali di riwayat.</p>
                 </div>
               </div>
-              <div class="field-row">
-                <div class="field">
-                  <label for="nama-pengeluaran">Nama pengeluaran <span class="required">*</span></label>
-                  <input id="nama-pengeluaran" name="nama" type="text" maxlength="80" placeholder="Contoh: Bayar SPP semester" autocomplete="off" required>
+              <div class="field-row field-row--needs">
+                <div class="field field-combobox">
+                  <label for="nama-pengeluaran">Kebutuhan yang Ingin Diprioritaskan <span class="required">*</span></label>
+                  <div class="combobox" id="combobox-kebutuhan">
+                    <div class="combobox-control">
+                      <svg class="icon combobox-icon" aria-hidden="true"><use href="#i-bag"></use></svg>
+                      <input id="nama-pengeluaran" name="nama" type="text" maxlength="80" placeholder="Pilih kategori atau ketik kebutuhan sendiri" autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="daftar-kebutuhan" aria-haspopup="listbox" required>
+                      <button type="button" class="combobox-toggle" id="combobox-toggle" aria-label="Buka daftar kategori kebutuhan" aria-expanded="false" aria-controls="daftar-kebutuhan">
+                        <svg class="icon" aria-hidden="true"><use href="#i-chevron-down"></use></svg>
+                      </button>
+                    </div>
+                    <ul class="combobox-list" id="daftar-kebutuhan" role="listbox" aria-label="Kategori kebutuhan" hidden></ul>
+                    <p class="combobox-hint" id="kategori-terpilih">Pilih kategori dari daftar atau ketik kebutuhan sendiri.</p>
+                  </div>
                 </div>
                 <div class="field">
-                  <label for="nominal">Nominal <span class="optional">(opsional)</span></label>
+                  <label for="nominal">Nominal biaya <span class="optional">(opsional)</span></label>
                   <div class="input-prefix">
                     <span>Rp</span>
                     <input id="nominal" name="nominal" type="text" inputmode="numeric" placeholder="0" autocomplete="off">
                   </div>
+                </div>
+                <div class="field">
+                  <label for="dana">Dana tersedia <span class="optional">(opsional)</span></label>
+                  <div class="input-prefix">
+                    <span>Rp</span>
+                    <input id="dana" name="dana" type="text" inputmode="numeric" placeholder="0" autocomplete="off" aria-describedby="dana-hint">
+                  </div>
+                  <small class="field-hint" id="dana-hint">Untuk menilai kesesuaian harga (bobot 10%).</small>
                 </div>
               </div>
             </div>
@@ -449,7 +467,7 @@
                 <svg class="icon" aria-hidden="true"><use href="#i-reset"></use></svg>
                 Reset
               </button>
-              <p class="form-hint" id="form-hint" role="status">Isi nama pengeluaran dan 5 indikator untuk mengaktifkan tombol analisis.</p>
+              <p class="form-hint" id="form-hint" role="status">Pilih atau ketik kebutuhan dan lengkapi 5 indikator untuk mengaktifkan tombol analisis.</p>
             </div>
           </form>
 
@@ -499,8 +517,8 @@
         <div class="page-head page-head-row">
           <div>
             <span class="eyebrow">Tersimpan di perangkat</span>
-            <h1 id="judul-riwayat">Riwayat Analisis</h1>
-            <p>Hasil yang kamu simpan tersimpan di <em>localStorage</em> browser ini dan diurutkan dari P1 ke P4.</p>
+            <h1 id="judul-riwayat">Riwayat &amp; Perbandingan</h1>
+            <p>Setiap analisis tersimpan otomatis di <em>localStorage</em>. Pilih dua kebutuhan atau lebih untuk membandingkan skor prioritasnya.</p>
           </div>
           <button class="btn btn-danger-ghost" id="btn-hapus-semua" type="button" hidden>
             <svg class="icon" aria-hidden="true"><use href="#i-trash"></use></svg>
@@ -509,6 +527,40 @@
         </div>
 
         <div class="history-stats" id="riwayat-stats"></div>
+
+        <div class="compare-bar" id="compare-bar">
+          <div class="compare-bar-info">
+            <span class="compare-bar-icon"><svg class="icon" aria-hidden="true"><use href="#i-chart"></use></svg></span>
+            <div>
+              <strong>Bandingkan kebutuhan</strong>
+              <small>Centang minimal dua kebutuhan pada daftar riwayat untuk melihat urutan prioritas dan alasannya.</small>
+            </div>
+          </div>
+          <div class="compare-bar-actions">
+            <span class="compare-count" id="compare-count">0 dipilih</span>
+            <button class="btn btn-ghost btn-sm" type="button" id="btn-reset-pilihan" hidden>
+              <svg class="icon" aria-hidden="true"><use href="#i-reset"></use></svg>
+              Bersihkan
+            </button>
+            <button class="btn btn-primary btn-sm" type="button" id="btn-bandingkan" disabled>
+              <svg class="icon" aria-hidden="true"><use href="#i-chart"></use></svg>
+              Bandingkan
+            </button>
+          </div>
+        </div>
+
+        <section class="compare-result" id="riwayat-perbandingan" aria-live="polite" hidden></section>
+
+        <section class="saved-comparisons" id="saved-comparisons" hidden aria-labelledby="judul-perbandingan-tersimpan">
+          <div class="saved-comparisons-head">
+            <div>
+              <span class="eyebrow">Riwayat perbandingan</span>
+              <h2 id="judul-perbandingan-tersimpan">Perbandingan Tersimpan</h2>
+              <p>Buka kembali hasil perbandingan yang pernah dibuat.</p>
+            </div>
+          </div>
+          <div class="saved-comparison-list" id="saved-comparison-list"></div>
+        </section>
 
         <div class="history-toolbar">
           <div class="filter-chips" id="riwayat-filter" aria-label="Filter prioritas">
@@ -556,6 +608,23 @@
             <p>Formulir kartu pilihan, tampilan hasil yang menjelaskan aturan pendukung, penyimpanan riwayat lokal, serta mode terang dan gelap.</p>
           </article>
         </div>
+
+        <section class="about-section" aria-labelledby="judul-penilaian">
+          <span class="eyebrow">Transparansi skor</span>
+          <h2 id="judul-penilaian">Sistem Penilaian Prioritas Otomatis</h2>
+          <p class="section-lead">Selain inferensi aturan, setiap kebutuhan diberi skor 0–100 dari empat kriteria dengan bobot tetap. Skor membantu membandingkan beberapa kebutuhan sekaligus.</p>
+          <div class="weight-grid">
+            <article class="weight-card"><strong>35%</strong><span>Tingkat kebutuhan</span><small>Seberapa penting kebutuhan ini bagi hidup dan studimu.</small></article>
+            <article class="weight-card"><strong>30%</strong><span>Tingkat urgensi</span><small>Seberapa cepat kebutuhan ini harus dipenuhi.</small></article>
+            <article class="weight-card"><strong>25%</strong><span>Manfaat perkuliahan</span><small>Seberapa erat kaitannya dengan kegiatan kuliah.</small></article>
+            <article class="weight-card"><strong>10%</strong><span>Kesesuaian harga</span><small>Perbandingan nominal biaya dengan dana yang tersedia.</small></article>
+          </div>
+          <ul class="check-list">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg> Total bobot seluruh kriteria adalah 100%.</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg> Kebutuhan wajib (UKT, uang makan, transportasi, kos) mendapat skor tingkat kebutuhan minimal 90.</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg> Harga hanya berbobot 10%, sehingga kebutuhan yang lebih penting tidak otomatis kalah karena lebih mahal.</li>
+          </ul>
+        </section>
 
         <section class="about-section" aria-labelledby="judul-sumber">
           <div class="about-split">
@@ -751,6 +820,7 @@
   <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <script src="js/rules.js"></script>
+  <script src="js/penilaian.js"></script>
   <script src="js/engine.js"></script>
   <script src="js/app.js"></script>
 </body>

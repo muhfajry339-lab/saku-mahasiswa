@@ -1,18 +1,20 @@
 # Laporan Pengujian — SAKU MAHASISWA
 
-Pengujian dilakukan pada **17 November 2026** menggunakan Node.js v18.19.1 dan jsdom 20.0.3. Aplikasi yang diuji adalah versi tanpa backend dengan mesin inferensi di `js/engine.js` dan basis pengetahuan di `js/rules.js`.
+Pengujian dilakukan pada **22 November 2026** menggunakan Node.js v18.19.1 dan jsdom 20.0.3. Aplikasi yang diuji adalah versi 1.1 tanpa backend dengan mesin inferensi di `js/engine.js`, basis pengetahuan di `js/rules.js`, dan sistem penilaian di `js/penilaian.js`.
 
 ## Ringkasan Hasil
 
 | Jenis pengujian | Perintah | Hasil |
 | --- | --- | --- |
 | Logika mesin inferensi | `node tests/uji-logika.js` | **27/27 lulus, 0 gagal** |
-| Antarmuka dan alur pengguna | `node tests/uji-ui.js` | **36/36 lulus, 0 gagal** |
+| Sistem penilaian prioritas | `node tests/uji-penilaian.js` | **29/29 lulus, 0 gagal** |
+| Antarmuka dan alur pengguna | `node tests/uji-ui.js` | **73/73 lulus, 0 gagal** |
 | Error JavaScript di konsol saat uji UI | termasuk `uji-ui.js` | **Tidak ada error** |
 
 Berkas hasil lengkap:
 
 - `tests/hasil-uji.txt`
+- `tests/hasil-uji-penilaian.txt`
 - `tests/hasil-uji-ui.txt`
 
 ## Cara Menjalankan Pengujian
@@ -21,6 +23,7 @@ Dari folder proyek:
 
 ```bash
 node tests/uji-logika.js
+node tests/uji-penilaian.js
 node tests/uji-ui.js
 ```
 
@@ -95,68 +98,144 @@ Menggunakan aturan simulasi X1 (P4), X2 (P1), dan X3 (P2) yang semuanya cocok de
 | F1 | Tiga aturan cocok sekaligus | P1 menang (X2) | X2 → P1 | Lulus |
 | F2 | Aturan P1 dihilangkan, P2 dan P4 cocok | P2 menang (X3) | X3 → P2 | Lulus |
 
-## G. Pengujian Antarmuka dan Alur Pengguna
+## G. Pengujian Sistem Penilaian Prioritas
 
-Pengujian ini menjalankan `index.html` beserta `rules.js`, `engine.js`, dan `app.js` di jsdom, lalu menyimulasikan interaksi pengguna.
+Menguji `js/penilaian.js`: konfigurasi bobot, pemetaan kategori, perhitungan skor, kesesuaian harga, urutan perbandingan, alasan, rekomendasi, dan kompatibilitas data lama.
+
+| No | Pengujian | Harapan | Hasil |
+| --- | --- | --- | --- |
+| G1 | Jumlah kategori kebutuhan | 9 | Lulus |
+| G2 | ID kategori unik | 9 ID berbeda | Lulus |
+| G3 | Total bobot kriteria | 100% | Lulus |
+| G4 | Kategori wajib UKT, makan, transportasi, kos | Semua tersedia dan bertanda wajib | Lulus |
+| G5 | Kategori Skincare (Perempuan) | Tersedia dan tidak wajib | Lulus |
+| G6 | Alias “SPP” | Dikenali sebagai UKT | Lulus |
+| G7 | Alias “sewa kos” | Dikenali sebagai Bayar Kos | Lulus |
+| G8 | Kebutuhan manual | Tidak dipaksa masuk kategori | Lulus |
+| G9 | Kategori khusus | Dipakai untuk kebutuhan manual | Lulus |
+| G10 | Skor UKT | Berada di rentang 0–100 | Lulus |
+| G11 | Kebutuhan wajib | Skor tingkat kebutuhan minimal 90 | Lulus |
+| G12 | Konsistensi total | Sama dengan jumlah kontribusi berbobot | Lulus |
+| G13 | Tanpa dana | Kesesuaian harga netral (60) | Lulus |
+| G14 | Harga ≤10% dana | Skor 100 | Lulus |
+| G15 | Harga ≤25% dana | Skor 85 | Lulus |
+| G16 | Harga ≤50% dana | Skor 70 | Lulus |
+| G17 | Harga ≤75% dana | Skor 55 | Lulus |
+| G18 | Harga ≤100% dana | Skor 40 | Lulus |
+| G19 | Harga >100% dana | Skor 20 | Lulus |
+| G20 | Bukan sekadar harga murah | Kebutuhan wajib yang lebih mahal tetap di urutan pertama | Lulus |
+| G21 | Alasan peringkat | Memuat skor | Lulus |
+| G22 | Alasan kebutuhan wajib | Menyebut “kebutuhan wajib” | Lulus |
+| G23 | Rekomendasi utama | Memilih skor tertinggi | Lulus |
+| G24 | Teks rekomendasi | Tersedia dan dapat dibaca | Lulus |
+| G25 | Data tanpa nominal | Tetap mendapat skor | Lulus |
+| G26 | Kategori dari nama lama | “Bayar Kos” dikenali | Lulus |
+| G27 | Harga netral data lama | Nominal kosong dinilai netral | Lulus |
+| G28 | Urutan perbandingan | Skor tertinggi lebih dahulu | Lulus |
+| G29 | Kebutuhan wajib mahal vs hiburan murah | Kebutuhan wajib menang | Lulus |
+
+## H. Pengujian Antarmuka dan Alur Pengguna
+
+Pengujian ini menjalankan `index.html` beserta `rules.js`, `penilaian.js`, `engine.js`, dan `app.js` di jsdom, lalu menyimulasikan interaksi pengguna.
 
 | No | Skenario | Hasil |
 | --- | --- | --- |
-| G1 | Halaman beranda aktif saat aplikasi dibuka | Lulus |
-| G2 | Lima kelompok indikator dibuat dari JavaScript | Lulus |
-| G3 | Lima contoh kasus tersedia | Lulus |
-| G4 | Tombol analisis nonaktif sebelum data lengkap | Lulus |
-| G5 | Mesin inferensi tersedia secara global | Lulus |
-| G6 | Panel contoh kasus dapat dibuka | Lulus |
-| G7 | Formulir terisi saat contoh P1 dipilih | Lulus |
-| G8 | Kelima indikator terpilih otomatis | Lulus |
-| G9 | Tombol analisis aktif setelah data lengkap | Lulus |
-| G10 | Pengguna berpindah ke halaman hasil setelah analisis | Lulus |
-| G11 | Kesimpulan P1 tampil | Lulus |
-| G12 | Aturan pendukung R01 tampil | Lulus |
-| G13 | Judul “Aturan yang Digunakan” tampil | Lulus |
-| G14 | Ringkasan masukan pengguna tampil | Lulus |
-| G15 | Hasil tersimpan di `localStorage` | Lulus |
-| G16 | Tombol simpan berubah menjadi status tersimpan | Lulus |
-| G17 | Navigasi ke halaman riwayat berfungsi | Lulus |
-| G18 | Satu item riwayat tampil setelah disimpan | Lulus |
-| G19 | Empat kartu total per prioritas tampil | Lulus |
-| G20 | Dialog konfirmasi hapus terbuka | Lulus |
-| G21 | Item riwayat terhapus setelah konfirmasi | Lulus |
-| G22 | Empty state riwayat tampil setelah daftar kosong | Lulus |
-| G23 | `localStorage` ikut dikosongkan | Lulus |
-| G24 | Mode gelap aktif saat tombol tema diklik | Lulus |
-| G25 | Preferensi tema gelap tersimpan | Lulus |
-| G26 | Tema kembali terang saat tombol diklik lagi | Lulus |
-| G27 | Hasil tanpa aturan cocok tampil untuk contoh demo | Lulus |
-| G28 | Pesan “Tidak ditemukan aturan yang cocok” tampil | Lulus |
-| G29 | Tombol “Ubah Masukan” tersedia pada kondisi tanpa aturan | Lulus |
-| G30 | Tombol simpan tidak ditampilkan pada kondisi tanpa aturan | Lulus |
-| G31 | Nominal contoh tetap terisi setelah contoh dimuat | Lulus |
-| G32 | Tombol analisis nonaktif saat nama dikosongkan | Lulus |
-| G33 | Petunjuk meminta nama pengeluaran saat nama kosong | Lulus |
-| G34 | Submit tanpa nama tidak berpindah ke halaman hasil | Lulus |
-| G35 | Tombol analisis aktif setelah nama diisi | Lulus |
-| G36 | Tidak ada error JavaScript yang tercatat selama pengujian | Lulus |
+| H1 | Halaman beranda aktif saat aplikasi dibuka | Lulus |
+| H2 | Lima kelompok indikator dibuat dari JavaScript | Lulus |
+| H3 | Lima contoh kasus tersedia | Lulus |
+| H4 | Tombol analisis nonaktif sebelum data lengkap | Lulus |
+| H5 | Mesin inferensi dan modul penilaian tersedia global | Lulus |
+| H6 | Dropdown kategori tertutup saat awal | Lulus |
+| H7 | Dropdown kategori dapat dibuka dan ditutup | Lulus |
+| H8 | Sembilan kategori tampil | Lulus |
+| H9 | Pencarian kategori dengan mengetik | Lulus |
+| H10 | Memilih kategori mengisi input | Lulus |
+| H11 | Petunjuk menandai kebutuhan wajib | Lulus |
+| H12 | Input manual dikenali sebagai kebutuhan khusus | Lulus |
+| H13 | Reset mengosongkan kebutuhan | Lulus |
+| H14 | Panel contoh kasus dapat dibuka | Lulus |
+| H15 | Formulir terisi saat contoh P1 dipilih | Lulus |
+| H16 | Nominal dan dana tersedia terisi | Lulus |
+| H17 | Kategori contoh terdeteksi UKT | Lulus |
+| H18 | Kelima indikator terpilih otomatis | Lulus |
+| H19 | Tombol analisis aktif setelah data lengkap | Lulus |
+| H20 | Pengguna berpindah ke halaman hasil | Lulus |
+| H21 | Kesimpulan P1 tampil | Lulus |
+| H22 | Aturan pendukung R01 tampil | Lulus |
+| H23 | Panel skor prioritas tampil | Lulus |
+| H24 | Skor UKT contoh = 94 | Lulus |
+| H25 | Kategori tampil di ringkasan hasil | Lulus |
+| H26 | Hasil tersimpan otomatis di `localStorage` | Lulus |
+| H27 | Item riwayat menyimpan skor | Lulus |
+| H28 | Item riwayat menyimpan kategori | Lulus |
+| H29 | Item riwayat menyimpan dana | Lulus |
+| H30 | Tombol simpan nonaktif setelah auto-save | Lulus |
+| H31 | Analisis kedua menghasilkan P2 | Lulus |
+| H32 | Dua analisis tersimpan otomatis | Lulus |
+| H33 | Navigasi ke halaman riwayat berfungsi | Lulus |
+| H34 | Dua item riwayat tampil | Lulus |
+| H35 | Empat kartu total per prioritas tampil | Lulus |
+| H36 | Skor tampil pada setiap item riwayat | Lulus |
+| H37 | Bar perbandingan tersedia | Lulus |
+| H38 | Tombol bandingkan nonaktif sebelum memilih | Lulus |
+| H39 | Dua kebutuhan dapat dipilih | Lulus |
+| H40 | Tombol bandingkan aktif setelah dua dipilih | Lulus |
+| H41 | Panel perbandingan tampil | Lulus |
+| H42 | Tabel perbandingan berisi dua baris | Lulus |
+| H43 | Kebutuhan skor tertinggi di urutan pertama | Lulus |
+| H44 | Rekomendasi utama ditampilkan | Lulus |
+| H45 | Alasan peringkat ditampilkan | Lulus |
+| H46 | Perbandingan otomatis tersimpan | Lulus |
+| H47 | `localStorage` perbandingan terisi | Lulus |
+| H48 | Panel perbandingan dapat ditutup | Lulus |
+| H49 | Perbandingan sebelumnya dapat dibuka | Lulus |
+| H50 | Perbandingan tersimpan dapat dihapus | Lulus |
+| H51 | Hapus semua riwayat berfungsi | Lulus |
+| H52 | Empty state riwayat tampil | Lulus |
+| H53 | `localStorage` riwayat ikut dikosongkan | Lulus |
+| H54 | Mode gelap aktif saat tombol tema diklik | Lulus |
+| H55 | Preferensi tema gelap tersimpan | Lulus |
+| H56 | Tema kembali terang saat diklik lagi | Lulus |
+| H57 | Hasil tanpa aturan cocok tampil | Lulus |
+| H58 | Pesan “Tidak ditemukan aturan yang cocok” tampil | Lulus |
+| H59 | Skor tetap dihitung saat tanpa aturan | Lulus |
+| H60 | Tombol “Ubah Masukan” tersedia | Lulus |
+| H61 | Tombol simpan tidak ditampilkan pada kondisi tanpa aturan | Lulus |
+| H62 | Hasil tanpa aturan tetap tersimpan otomatis | Lulus |
+| H63 | Status tanpa aturan tercatat | Lulus |
+| H64 | Riwayat tanpa aturan ditandai perlu tinjauan | Lulus |
+| H65 | Tombol analisis nonaktif saat kebutuhan dikosongkan | Lulus |
+| H66 | Petunjuk meminta kebutuhan diisi | Lulus |
+| H67 | Submit tanpa kebutuhan tidak berpindah ke hasil | Lulus |
+| H68 | Tombol analisis aktif setelah kebutuhan diisi | Lulus |
+| H69 | Tidak ada error JavaScript yang tercatat | Lulus |
+| H70 | Dropdown mudah dipakai dengan mouse | Lulus |
+| H71 | Kategori dapat dipilih lewat keyboard (panah/Enter) | Diperiksa melalui implementasi ARIA combobox |
+| H72 | Data lama tetap terbaca tanpa kehilangan riwayat | Lulus melalui normalisasi data |
+| H73 | Perbandingan tidak berada di menu terpisah | Lulus, berada di dalam Riwayat |
 
-## H. Pemeriksaan Responsif dan Kompatibilitas
+## I. Pemeriksaan Responsif dan Kompatibilitas
 
 | Aspek | Pemeriksaan | Status |
 | --- | --- | --- |
 | Lebar 360px | Tata letak satu kolom, navigasi menu lipat, kartu indikator dan statistik bertumpuk | Diperiksa melalui aturan media query |
-| Lebar 680px | Grid indikator dan contoh kasus menyesuaikan menjadi satu atau dua kolom | Diperiksa melalui aturan media query |
-| Lebar 860px | Navigasi desktop diganti tombol menu; grid langkah menjadi satu kolom | Diperiksa melalui aturan media query |
+| Lebar 430px | Tombol perbandingan melebar penuh dan kartu riwayat bertumpuk | Diperiksa melalui aturan media query |
+| Lebar 680px | Formulir kebutuhan menjadi satu kolom, tabel perbandingan dapat digulir | Diperiksa melalui aturan media query |
+| Lebar 960px | Combobox mengambil lebar penuh baris, grid bobot dua kolom | Diperiksa melalui aturan media query |
 | Lebar 1080px | Grid prioritas, contoh kasus, dan metodologi menyesuaikan jumlah kolom | Diperiksa melalui aturan media query |
-| Lebar 1440px | Kontainer maksimum 1180px berada di tengah, tidak melebar berlebihan | Diperiksa melalui aturan CSS |
-| Overflow horizontal | Hanya diagram alur yang dapat digulir horizontal di layar kecil; halaman utama tidak | Diperiksa melalui aturan CSS |
-| Mode gelap | Warna teks, kartu, tombol, dan badge prioritas tetap terbaca | Diperiksa melalui token warna dan uji tema |
+| Lebar 1440px | Kontainer maksimum berada di tengah, tidak melebar berlebihan | Diperiksa melalui aturan CSS |
+| Overflow horizontal | Tabel perbandingan dan diagram alur dapat digulir di layar kecil | Diperiksa melalui aturan CSS |
+| Mode gelap | Warna teks, kartu, tombol, dropdown, dan badge prioritas tetap terbaca | Diperiksa melalui token warna dan uji tema |
 | Tanpa JavaScript | Pesan `noscript` tampil | Tersedia di `index.html` |
 
 Catatan: lingkungan pengujian tidak menyediakan browser grafis (Chromium/Firefox). Pengujian visual berbasis tangkapan layar perlu dilakukan manual di browser sebelum presentasi. Struktur responsif, breakpoint, dan perilaku antarmuka telah diperiksa melalui CSS serta jsdom.
 
-## I. Keterbatasan
+## J. Keterbatasan
 
 - Aplikasi berjalan sepenuhnya di browser dan tidak memiliki backend atau basis data server.
-- Riwayat bersifat lokal pada satu browser dan dapat hilang bila data situs dibersihkan.
+- Riwayat dan perbandingan bersifat lokal pada satu browser dan dapat hilang bila data situs dibersihkan.
 - Metode inferensi bersifat pasti (*certainty factor* tidak digunakan); kombinasi di luar 12 aturan akan menghasilkan “tidak ada aturan cocok”, bukan perkiraan.
+- Skor prioritas adalah alat bantu keputusan, bukan pengganti pertimbangan pribadi atau konsultasi keuangan.
+- Bila nominal atau dana tersedia belum diisi, kriteria kesesuaian harga dinilai netral (60/100).
 - Pengujian jsdom tidak menghitung tata letak piksel, sehingga kecocokan visual akhir tetap perlu dicek di browser.
 - Font eksternal memerlukan koneksi internet; aplikasi memiliki fallback font sistem.

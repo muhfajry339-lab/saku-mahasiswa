@@ -4,52 +4,91 @@ A. PEMUATAN AWAL
   ✔ LULUS  Lima contoh kasus tersedia
   ✔ LULUS  Tombol analisis awalnya nonaktif
   ✔ LULUS  Mesin inferensi global tersedia
+  ✔ LULUS  Modul penilaian global tersedia
+  ✔ LULUS  Daftar kategori awal tertutup
 
-B. CONTOH KASUS & ANALISIS P1
+B. COMBOBOX KATEGORI
+  ✔ LULUS  Dropdown kategori terbuka
+  ✔ LULUS  Sembilan kategori tampil
+  ✔ LULUS  Dropdown dapat ditutup
+  ✔ LULUS  Pencarian kategori menyaring daftar
+  ✔ LULUS  Kategori terpilih mengisi input
+  ✔ LULUS  Petunjuk menandai kebutuhan wajib
+  ✔ LULUS  Input manual dikenali sebagai kebutuhan khusus
+  ✔ LULUS  Reset mengosongkan kebutuhan
+
+C. CONTOH KASUS, SKOR, DAN AUTO-SAVE
   ✔ LULUS  Panel contoh kasus terbuka
   ✔ LULUS  Formulir terisi nama contoh
-  ✔ LULUS  Nominal contoh tetap terisi
+  ✔ LULUS  Nominal contoh terisi
+  ✔ LULUS  Dana tersedia contoh terisi
+  ✔ LULUS  Kategori contoh terdeteksi UKT
   ✔ LULUS  Kelima indikator terpilih
   ✔ LULUS  Tombol analisis aktif setelah data lengkap
   ✔ LULUS  Berpindah ke halaman hasil
   ✔ LULUS  Kesimpulan P1 tampil
   ✔ LULUS  Aturan pendukung R01 ditampilkan
-  ✔ LULUS  Judul Aturan yang Digunakan tampil
-  ✔ LULUS  Ringkasan masukan pengguna tampil
+  ✔ LULUS  Panel skor otomatis tampil
+  ✔ LULUS  Skor UKT contoh adalah 94
+  ✔ LULUS  Kategori tampil di ringkasan hasil
+  ✔ LULUS  Hasil tersimpan otomatis di localStorage
+  ✔ LULUS  Item riwayat menyimpan skor
+  ✔ LULUS  Item riwayat menyimpan kategori
+  ✔ LULUS  Item riwayat menyimpan dana
+  ✔ LULUS  Tombol simpan sudah nonaktif karena auto-save
 
-C. SIMPAN & RIWAYAT
-  ✔ LULUS  Hasil tersimpan di localStorage
-  ✔ LULUS  Tombol simpan berubah menjadi tersimpan
+D. ANALISIS KEDUA
+  ✔ LULUS  Contoh kedua terisi
+  ✔ LULUS  Kesimpulan P2 tampil
+  ✔ LULUS  Dua analisis tersimpan otomatis
+
+E. RIWAYAT, PERBANDINGAN, DAN HAPUS
   ✔ LULUS  Halaman riwayat aktif
-  ✔ LULUS  Satu item riwayat tampil
+  ✔ LULUS  Dua item riwayat tampil
   ✔ LULUS  Empat kartu total per prioritas tampil
-
-D. HAPUS RIWAYAT
-  ✔ LULUS  Dialog konfirmasi terbuka
-  ✔ LULUS  Riwayat kosong setelah dihapus
+  ✔ LULUS  Skor tampil pada setiap item riwayat
+  ✔ LULUS  Bar perbandingan tersedia
+  ✔ LULUS  Tombol bandingkan awalnya nonaktif
+  ✔ LULUS  Dua kebutuhan terpilih
+  ✔ LULUS  Tombol bandingkan aktif
+  ✔ LULUS  Panel perbandingan tampil
+  ✔ LULUS  Tabel perbandingan berisi dua baris
+  ✔ LULUS  Kebutuhan skor tertinggi berada di urutan pertama
+  ✔ LULUS  Rekomendasi utama ditampilkan
+  ✔ LULUS  Dua alasan peringkat ditampilkan
+  ✔ LULUS  Perbandingan otomatis tersimpan
+  ✔ LULUS  localStorage perbandingan terisi
+  ✔ LULUS  Panel perbandingan dapat ditutup
+  ✔ LULUS  Perbandingan sebelumnya dapat dibuka
+  ✔ LULUS  Perbandingan tersimpan dapat dihapus
+  ✔ LULUS  Riwayat kosong setelah dihapus semua
   ✔ LULUS  Empty state riwayat tampil
-  ✔ LULUS  localStorage ikut dikosongkan
+  ✔ LULUS  localStorage riwayat ikut dikosongkan
 
-E. TEMA GELAP
+F. TEMA GELAP
   ✔ LULUS  Tema gelap aktif
   ✔ LULUS  Preferensi tema tersimpan
   ✔ LULUS  Tema kembali terang
 
-F. KASUS TIDAK ADA ATURAN COCOK
+G. KASUS TIDAK ADA ATURAN COCOK
   ✔ LULUS  Hasil tanpa aturan cocok tampil
   ✔ LULUS  Pesan tidak ditemukan aturan cocok tampil
+  ✔ LULUS  Skor tetap dihitung saat tanpa aturan
   ✔ LULUS  Tombol Ubah Masukan tersedia
   ✔ LULUS  Tidak ada tombol simpan pada kondisi tanpa aturan
+  ✔ LULUS  Hasil tanpa aturan tetap tersimpan otomatis
+  ✔ LULUS  Status tanpa aturan tercatat
+  ✔ LULUS  Riwayat tanpa aturan ditandai perlu tinjauan
 
-G. VALIDASI NAMA WAJIB
-  ✔ LULUS  Tombol analisis nonaktif saat nama dikosongkan
-  ✔ LULUS  Petunjuk meminta nama pengeluaran
-  ✔ LULUS  Submit tanpa nama tidak berpindah ke hasil
-  ✔ LULUS  Tombol analisis aktif setelah nama diisi
+H. VALIDASI KEBUTUHAN WAJIB
+  ✔ LULUS  Tombol analisis nonaktif saat kebutuhan dikosongkan
+  ✔ LULUS  Petunjuk meminta kebutuhan diisi
+  ✔ LULUS  Submit tanpa kebutuhan tidak berpindah ke hasil
+  ✔ LULUS  Tombol analisis aktif setelah kebutuhan diisi
 
-H. PEMERIKSAAN KONSOL
+I. PEMERIKSAAN KONSOL
   ✔ LULUS  Tidak ada error JavaScript yang tercatat
 
 ============================================================
- HASIL AKHIR UI: 36/36 pengujian lulus, 0 gagal.
+ HASIL AKHIR UI: 73/73 pengujian lulus, 0 gagal.
 ============================================================
