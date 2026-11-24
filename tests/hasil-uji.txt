@@ -9,6 +9,8 @@ A. VALIDASI BASIS PENGETAHUAN
   ✔ LULUS  ID aturan unik  →  12
   ✔ LULUS  Semua aturan memiliki 5 kondisi  →  true
   ✔ LULUS  Semua hasil berada pada P1–P4  →  ["P1","P2","P3","P4"]
+  ✔ LULUS  Cakupan fakta lengkap minimal 90%  →  true
+  ✔ LULUS  Seluruh kombinasi kebutuhan lengkap menghasilkan keputusan  →  81
 
 B. SATU KASUS UNTUK SETIAP ATURAN
   ✔ LULUS  R01 → P1 (Kebutuhan akademik/pokok yang sangat mendesak, misalnya membayar SPP.)  →  {"status":"cocok","id":"R01","prioritas":"P1"}
@@ -18,11 +20,11 @@ B. SATU KASUS UNTUK SETIAP ATURAN
   ✔ LULUS  R05 → P2 (Mendesak dan terkait kuliah, tetapi tingkat kepentingannya menengah.)  →  {"status":"cocok","id":"R05","prioritas":"P2"}
   ✔ LULUS  R06 → P2 (Persiapan jangka panjang untuk kuliah yang tetap perlu dianggarkan.)  →  {"status":"cocok","id":"R06","prioritas":"P2"}
   ✔ LULUS  R07 → P3 (Penunjang kuliah sekunder yang tidak terlalu mendesak.)  →  {"status":"cocok","id":"R07","prioritas":"P3"}
-  ✔ LULUS  R08 → P3 (Kebutuhan sehari-hari rutin yang waktunya masih bisa digeser.)  →  {"status":"cocok","id":"R08","prioritas":"P3"}
-  ✔ LULUS  R09 → P3 (Keinginan sesaat yang mendadak, tetapi minim dampak akademis.)  →  {"status":"cocok","id":"R09","prioritas":"P3"}
-  ✔ LULUS  R10 → P4 (Hiburan atau rekreasi yang sebaiknya menunggu dana sisa.)  →  {"status":"cocok","id":"R10","prioritas":"P4"}
-  ✔ LULUS  R11 → P4 (Keinginan konsumtif yang tidak berkaitan dengan kegiatan kuliah.)  →  {"status":"cocok","id":"R11","prioritas":"P4"}
-  ✔ LULUS  R12 → P4 (Tersier/hiburan tidak mendesak yang bisa dibatalkan jika anggaran menipis.)  →  {"status":"cocok","id":"R12","prioritas":"P4"}
+  ✔ LULUS  R08 → P3 (Kebutuhan lain yang tidak memenuhi aturan prioritas lebih tinggi; masih dapat dijadwalkan.)  →  {"status":"cocok","id":"R08","prioritas":"P3"}
+  ✔ LULUS  R09 → P3 (Keinginan berdampak rendah atau sedang; bukan prioritas utama.)  →  {"status":"cocok","id":"R09","prioritas":"P3"}
+  ✔ LULUS  R10 → P4 (Keinginan dengan urgensi sedang yang sebaiknya menunggu dana sisa.)  →  {"status":"cocok","id":"R10","prioritas":"P4"}
+  ✔ LULUS  R11 → P4 (Keinginan mendesak yang tetap dapat ditunda karena bukan kebutuhan pokok.)  →  {"status":"cocok","id":"R11","prioritas":"P4"}
+  ✔ LULUS  R12 → P4 (Keinginan tersier berurgensi rendah yang bisa dibatalkan jika anggaran menipis.)  →  {"status":"cocok","id":"R12","prioritas":"P4"}
 
 C. PENGUJIAN KONDISI NILAI ARRAY (R02)
   ✔ LULUS  R02 menerima kaitan = Sedang  →  {"status":"cocok","id":"R02"}
@@ -44,5 +46,5 @@ F. RESOLUSI KONFLIK ANTAR-ATURAN
   ✔ LULUS  Tanpa aturan P1, P2 mengalahkan P4  →  {"status":"cocok","id":"X3","hasil":"P2"}
 
 ============================================================
- HASIL AKHIR: 27/27 pengujian lulus, 0 gagal.
+ HASIL AKHIR: 29/29 pengujian lulus, 0 gagal.
 ============================================================

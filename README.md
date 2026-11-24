@@ -28,9 +28,10 @@ Lalu buka `http://localhost:8000` di browser.
 - Analisis kebutuhan berdasarkan 5 indikator: kepentingan, urgensi, jenis kebutuhan, dampak, dan kaitan dengan kegiatan kuliah.
 - **Skor prioritas otomatis 0–100** dengan bobot tetap: tingkat kebutuhan 35%, urgensi 30%, manfaat perkuliahan 25%, dan kesesuaian harga 10%.
 - 12 aturan IF–THEN dengan 4 tingkat kesimpulan: P1, P2, P3, dan P4.
+- Kondisi aturan memakai nilai alternatif sehingga **156 dari 162 kombinasi fakta lengkap (96,3%)** menghasilkan keputusan; seluruh kombinasi kebutuhan tertangani.
 - Inferensi forward chaining serta resolusi konflik: bila beberapa aturan cocok, prioritas tertinggi (P1 lebih tinggi daripada P4) yang dipilih.
 - Kartu hasil berisi prioritas, rekomendasi tindakan, ringkasan masukan, rincian skor per kriteria, dan **hanya aturan yang benar-benar digunakan**.
-- Penanganan jujur saat tidak ada aturan yang cocok, tanpa menebak prioritas. Skor tetap dihitung agar kebutuhan dapat dibandingkan.
+- Penanganan jujur untuk kombinasi yang benar-benar di luar cakupan, tanpa menebak prioritas. Skor tetap dihitung agar kebutuhan dapat dibandingkan.
 - Lima contoh kasus untuk mencoba aplikasi dengan cepat.
 - **Riwayat otomatis**: setiap hasil analisis langsung tersimpan di `localStorage` tanpa perlu menekan tombol simpan.
 - **Perbandingan prioritas di dalam menu Riwayat**: centang dua kebutuhan atau lebih, lalu lihat urutan skor, urgensi, nominal, alasan, dan rekomendasi utama.
@@ -113,7 +114,7 @@ Lima fakta yang dikumpulkan dari pengguna:
 | K4 | Dampak | Tinggi, Sedang, Rendah |
 | K5 | Kaitan dengan kegiatan kuliah | Tinggi, Sedang, Rendah |
 
-Basis pengetahuan memiliki 12 aturan IF–THEN (R01–R12) yang menghasilkan salah satu dari empat kesimpulan:
+Basis pengetahuan memiliki 12 aturan IF–THEN (R01–R12) yang menghasilkan salah satu dari empat kesimpulan. Setiap kondisi dapat berisi satu nilai atau beberapa nilai alternatif (array) agar cakupan kombinasi lebih luas tanpa menambah jumlah aturan:
 
 | Prioritas | Makna | Warna |
 | --- | --- | --- |
@@ -128,7 +129,7 @@ Alur inferensi:
 2. Setiap aturan diperiksa: semua kondisi harus terpenuhi. Nilai berupa array berarti salah satu nilai dalam array diterima.
 3. Aturan yang cocok dikumpulkan. Jika lebih dari satu, mesin memilih hasil dengan prioritas tertinggi.
 4. Antarmuka menampilkan kesimpulan, rekomendasi, ringkasan masukan, rincian skor, dan aturan pendukung.
-5. Jika tidak ada aturan yang cocok, aplikasi menampilkan pesan bahwa keputusan tidak dapat dibuat dan meminta pengguna mengubah masukan. Skor tetap dihitung.
+5. Setelah perluasan kondisi, hanya 6 dari 162 kombinasi fakta lengkap (kombinasi keinginan yang kontradiktif, misalnya keinginan berdampak tinggi) yang tidak memiliki aturan cocok. Untuk kasus itu aplikasi menampilkan pesan bahwa keputusan tidak dapat dibuat dan meminta pengguna mengubah masukan; skor tetap dihitung.
 6. Hasil tersimpan otomatis di Riwayat. Pengguna dapat membandingkan dua kebutuhan atau lebih di menu Riwayat.
 
 Daftar lengkap aturan sengaja tidak ditampilkan sebagai daftar di halaman aplikasi. Halaman hasil hanya menampilkan aturan yang digunakan pada analisis tersebut.
@@ -153,7 +154,7 @@ Pengujian logika mesin inferensi:
 node tests/uji-logika.js
 ```
 
-Hasil: **27/27 pengujian lulus**.
+Hasil: **29/29 pengujian lulus**.
 
 Pengujian sistem penilaian otomatis:
 

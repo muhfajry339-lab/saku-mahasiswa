@@ -6,7 +6,7 @@ Pengujian dilakukan pada **22 November 2026** menggunakan Node.js v18.19.1 dan j
 
 | Jenis pengujian | Perintah | Hasil |
 | --- | --- | --- |
-| Logika mesin inferensi | `node tests/uji-logika.js` | **27/27 lulus, 0 gagal** |
+| Logika mesin inferensi | `node tests/uji-logika.js` | **29/29 lulus, 0 gagal** |
 | Sistem penilaian prioritas | `node tests/uji-penilaian.js` | **29/29 lulus, 0 gagal** |
 | Antarmuka dan alur pengguna | `node tests/uji-ui.js` | **73/73 lulus, 0 gagal** |
 | Error JavaScript di konsol saat uji UI | termasuk `uji-ui.js` | **Tidak ada error** |
@@ -41,6 +41,10 @@ npm install --no-save jsdom
 | A2 | ID aturan unik | 12 ID berbeda | Lulus |
 | A3 | Setiap aturan memiliki 5 kondisi | Ya | Lulus |
 | A4 | Semua kesimpulan berada di P1–P4 | P1, P2, P3, P4 | Lulus |
+| A5 | Cakupan fakta lengkap minimal 90% | ≥ 90% | Lulus (156/162 = 96,3%) |
+| A6 | Seluruh kombinasi kebutuhan lengkap menghasilkan keputusan | 81 dari 81 | Lulus |
+
+Catatan cakupan: kondisi 12 aturan memakai nilai alternatif (array). Dari 162 kombinasi lima indikator, 156 kombinasi (96,3%) menghasilkan keputusan dan hanya 6 kombinasi keinginan yang kontradiktif yang tetap `tidak_cocok`. Seluruh 81 kombinasi berjenis Kebutuhan tertangani.
 
 ## B. Satu Kasus untuk Setiap Aturan
 
@@ -78,7 +82,7 @@ Mesin harus mengembalikan status `tidak_cocok`, tidak memilih aturan, dan tidak 
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | D1 | Jaket edisi terbatas (contoh demo) | R | R | Keinginan | S | R | Tidak cocok | `tidak_cocok`, aturan `null` | Lulus |
 | D2 | Kombinasi tidak terdefinisi #1 | T | R | Keinginan | T | T | Tidak cocok | `tidak_cocok`, aturan `null` | Lulus |
-| D3 | Kombinasi tidak terdefinisi #2 | S | T | Kebutuhan | S | T | Tidak cocok | `tidak_cocok`, aturan `null` | Lulus |
+| D3 | Kombinasi tidak terdefinisi #2 | T | R | Keinginan | T | S | Tidak cocok | `tidak_cocok`, aturan `null` | Lulus |
 | D4 | Fakta tidak lengkap (hanya 2 indikator) | T | T | — | — | — | Tidak cocok | `tidak_cocok`, aturan `null` | Lulus |
 
 ## E. Pengujian Fungsi `cocokkanAturan()`
@@ -234,7 +238,7 @@ Catatan: lingkungan pengujian tidak menyediakan browser grafis (Chromium/Firefox
 
 - Aplikasi berjalan sepenuhnya di browser dan tidak memiliki backend atau basis data server.
 - Riwayat dan perbandingan bersifat lokal pada satu browser dan dapat hilang bila data situs dibersihkan.
-- Metode inferensi bersifat pasti (*certainty factor* tidak digunakan); kombinasi di luar 12 aturan akan menghasilkan “tidak ada aturan cocok”, bukan perkiraan.
+- Metode inferensi bersifat pasti (*certainty factor* tidak digunakan). Setelah kondisi aturan diperluas, 156 dari 162 kombinasi fakta lengkap menghasilkan keputusan; 6 kombinasi keinginan kontradiktif (keinginan dengan urgensi rendah tetapi dampak tinggi, atau sejenisnya) tetap menghasilkan “tidak ada aturan cocok”, bukan perkiraan.
 - Skor prioritas adalah alat bantu keputusan, bukan pengganti pertimbangan pribadi atau konsultasi keuangan.
 - Bila nominal atau dana tersedia belum diisi, kriteria kesesuaian harga dinilai netral (60/100).
 - Pengujian jsdom tidak menghitung tata letak piksel, sehingga kecocokan visual akhir tetap perlu dicek di browser.

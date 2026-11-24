@@ -33,9 +33,9 @@ const SAKU_RULES = [
     id: "R02",
     kondisi: {
       kepentingan: "Tinggi",
-      urgensi: "Tinggi",
+      urgensi: ["Tinggi", "Sedang"],
       jenis: "Kebutuhan",
-      dampak: "Tinggi",
+      dampak: ["Tinggi", "Sedang"],
       kaitan: ["Sedang", "Rendah"],
     },
     hasil: "P1",
@@ -46,10 +46,10 @@ const SAKU_RULES = [
     id: "R03",
     kondisi: {
       kepentingan: "Tinggi",
-      urgensi: "Sedang",
+      urgensi: ["Sedang", "Tinggi"],
       jenis: "Kebutuhan",
       dampak: "Tinggi",
-      kaitan: "Tinggi",
+      kaitan: ["Tinggi", "Sedang"],
     },
     hasil: "P1",
     deskripsi:
@@ -59,10 +59,10 @@ const SAKU_RULES = [
     id: "R04",
     kondisi: {
       kepentingan: "Tinggi",
-      urgensi: "Sedang",
+      urgensi: ["Sedang", "Tinggi"],
       jenis: "Kebutuhan",
-      dampak: "Sedang",
-      kaitan: "Tinggi",
+      dampak: ["Sedang", "Rendah", "Tinggi"],
+      kaitan: ["Tinggi", "Sedang", "Rendah"],
     },
     hasil: "P2",
     deskripsi:
@@ -75,7 +75,7 @@ const SAKU_RULES = [
       urgensi: "Tinggi",
       jenis: "Kebutuhan",
       dampak: "Tinggi",
-      kaitan: "Tinggi",
+      kaitan: ["Tinggi", "Sedang", "Rendah"],
     },
     hasil: "P2",
     deskripsi:
@@ -84,11 +84,11 @@ const SAKU_RULES = [
   {
     id: "R06",
     kondisi: {
-      kepentingan: "Tinggi",
+      kepentingan: ["Tinggi", "Sedang"],
       urgensi: "Rendah",
       jenis: "Kebutuhan",
-      dampak: "Sedang",
-      kaitan: "Tinggi",
+      dampak: ["Sedang", "Tinggi"],
+      kaitan: ["Tinggi", "Sedang"],
     },
     hasil: "P2",
     deskripsi:
@@ -97,11 +97,11 @@ const SAKU_RULES = [
   {
     id: "R07",
     kondisi: {
-      kepentingan: "Sedang",
-      urgensi: "Sedang",
+      kepentingan: ["Sedang", "Rendah", "Tinggi"],
+      urgensi: ["Sedang", "Rendah"],
       jenis: "Kebutuhan",
-      dampak: "Sedang",
-      kaitan: "Tinggi",
+      dampak: ["Sedang", "Tinggi"],
+      kaitan: ["Tinggi", "Sedang"],
     },
     hasil: "P3",
     deskripsi:
@@ -110,66 +110,66 @@ const SAKU_RULES = [
   {
     id: "R08",
     kondisi: {
-      kepentingan: "Sedang",
-      urgensi: "Rendah",
+      kepentingan: ["Sedang", "Rendah", "Tinggi"],
+      urgensi: ["Rendah", "Sedang", "Tinggi"],
       jenis: "Kebutuhan",
-      dampak: "Rendah",
-      kaitan: "Sedang",
+      dampak: ["Rendah", "Sedang", "Tinggi"],
+      kaitan: ["Sedang", "Rendah", "Tinggi"],
     },
     hasil: "P3",
     deskripsi:
-      "Kebutuhan sehari-hari rutin yang waktunya masih bisa digeser.",
+      "Kebutuhan lain yang tidak memenuhi aturan prioritas lebih tinggi; masih dapat dijadwalkan.",
   },
   {
     id: "R09",
     kondisi: {
-      kepentingan: "Sedang",
-      urgensi: "Tinggi",
+      kepentingan: ["Sedang", "Tinggi"],
+      urgensi: ["Tinggi", "Sedang", "Rendah"],
       jenis: "Keinginan",
-      dampak: "Rendah",
-      kaitan: "Rendah",
+      dampak: ["Rendah", "Sedang"],
+      kaitan: ["Rendah", "Sedang", "Tinggi"],
     },
     hasil: "P3",
     deskripsi:
-      "Keinginan sesaat yang mendadak, tetapi minim dampak akademis.",
+      "Keinginan berdampak rendah atau sedang; bukan prioritas utama.",
   },
   {
     id: "R10",
     kondisi: {
-      kepentingan: "Rendah",
+      kepentingan: ["Rendah", "Sedang", "Tinggi"],
       urgensi: "Sedang",
       jenis: "Keinginan",
-      dampak: "Rendah",
-      kaitan: "Rendah",
+      dampak: ["Rendah", "Sedang", "Tinggi"],
+      kaitan: ["Rendah", "Sedang", "Tinggi"],
     },
     hasil: "P4",
-    deskripsi: "Hiburan atau rekreasi yang sebaiknya menunggu dana sisa.",
+    deskripsi: "Keinginan dengan urgensi sedang yang sebaiknya menunggu dana sisa.",
   },
   {
     id: "R11",
     kondisi: {
-      kepentingan: "Rendah",
+      kepentingan: ["Rendah", "Sedang", "Tinggi"],
       urgensi: "Tinggi",
       jenis: "Keinginan",
-      dampak: "Rendah",
-      kaitan: "Rendah",
+      dampak: ["Rendah", "Sedang", "Tinggi"],
+      kaitan: ["Rendah", "Sedang", "Tinggi"],
     },
     hasil: "P4",
     deskripsi:
-      "Keinginan konsumtif yang tidak berkaitan dengan kegiatan kuliah.",
+      "Keinginan mendesak yang tetap dapat ditunda karena bukan kebutuhan pokok.",
   },
   {
     id: "R12",
     kondisi: {
-      kepentingan: "Rendah",
+      kepentingan: ["Rendah", "Sedang"],
       urgensi: "Rendah",
       jenis: "Keinginan",
-      dampak: "Rendah",
-      kaitan: "Rendah",
+      dampak: ["Rendah", "Tinggi"],
+      kaitan: ["Rendah", "Sedang", "Tinggi"],
     },
     hasil: "P4",
     deskripsi:
-      "Tersier/hiburan tidak mendesak yang bisa dibatalkan jika anggaran menipis.",
+      "Keinginan tersier berurgensi rendah yang bisa dibatalkan jika anggaran menipis.",
   },
 ];
 

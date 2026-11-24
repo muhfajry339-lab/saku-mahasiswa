@@ -53,6 +53,50 @@ uji(
   ["P1", "P2", "P3", "P4"]
 );
 
+const NILAI_INDIKATOR = {
+  kepentingan: ["Rendah", "Sedang", "Tinggi"],
+  urgensi: ["Rendah", "Sedang", "Tinggi"],
+  jenis: ["Kebutuhan", "Keinginan"],
+  dampak: ["Rendah", "Sedang", "Tinggi"],
+  kaitan: ["Rendah", "Sedang", "Tinggi"],
+};
+const KUNCI_INDIKATOR = Object.keys(NILAI_INDIKATOR);
+let totalKombinasi = 0;
+let kombinasiCocok = 0;
+let totalKebutuhan = 0;
+let kebutuhanCocok = 0;
+
+function hitungCakupan(index, fakta) {
+  if (index === KUNCI_INDIKATOR.length) {
+    totalKombinasi += 1;
+    const hasil = infer(fakta, RULES);
+    const kebutuhan = fakta.jenis === "Kebutuhan";
+    if (kebutuhan) totalKebutuhan += 1;
+    if (hasil.status === "cocok") {
+      kombinasiCocok += 1;
+      if (kebutuhan) kebutuhanCocok += 1;
+    }
+    return;
+  }
+
+  const kunci = KUNCI_INDIKATOR[index];
+  NILAI_INDIKATOR[kunci].forEach((nilai) => {
+    hitungCakupan(index + 1, { ...fakta, [kunci]: nilai });
+  });
+}
+
+hitungCakupan(0, {});
+uji(
+  "Cakupan fakta lengkap minimal 90%",
+  kombinasiCocok / totalKombinasi >= 0.9,
+  true
+);
+uji(
+  "Seluruh kombinasi kebutuhan lengkap menghasilkan keputusan",
+  kebutuhanCocok,
+  totalKebutuhan
+);
+
 /* ---------- 12 kasus, satu per aturan ---------- */
 console.log("\nB. SATU KASUS UNTUK SETIAP ATURAN");
 RULES.forEach((aturan) => {
@@ -107,11 +151,11 @@ const kasusTidakCocok = [
   {
     nama: "Kombinasi tidak terdefinisi #2",
     fakta: {
-      kepentingan: "Sedang",
-      urgensi: "Tinggi",
-      jenis: "Kebutuhan",
-      dampak: "Sedang",
-      kaitan: "Tinggi",
+      kepentingan: "Tinggi",
+      urgensi: "Rendah",
+      jenis: "Keinginan",
+      dampak: "Tinggi",
+      kaitan: "Sedang",
     },
   },
   {
